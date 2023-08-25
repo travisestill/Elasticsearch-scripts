@@ -1,4 +1,5 @@
 import csv
+import time
 import elasticsearch
 import datetime
 from dateutil.relativedelta import relativedelta
@@ -109,7 +110,8 @@ if __name__ == '__main__':
 
   results = search_future_timestamps(client)
   
-  print(f"Querying complete. Found {len(results)} results. Writing to CSV. This takes a long time too. Go get some water...")
+  print(f"Querying complete. Found {len(results)} results.")
+  time.sleep(5)
 
   with open('results.csv', 'w') as f:
 
@@ -125,5 +127,6 @@ if __name__ == '__main__':
       diff = relativedelta(timestamp, now)
 
       writer.writerow([index, doc_id, timestamp, f"{diff.years} years, {diff.months} months, {diff.days} days"])
+      print (f"Writing {index} {doc_id} {timestamp} {diff.years} years, {diff.months} months, {diff.days} days")
 
   print("Done! File saved to './results.csv'")
