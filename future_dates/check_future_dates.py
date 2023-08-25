@@ -5,8 +5,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import dateutil.parser
 import pytz
-import tkinter as tk
-from tkinter import ttk
+
 
 def get_client():
   print("Select Elasticsearch environment:")
@@ -132,74 +131,3 @@ if __name__ == '__main__':
       print (f"Writing {index} {doc_id} {timestamp}")
 
   print("Done! File saved to './results.csv'")
-
-root = tk.Tk()
-root.title('Future Timestamps')
-window_width = 1200
-window_height = 800
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-x = (screen_width/2) - (window_width/2)
-y = (screen_height/2) - (window_height/2)
-root.geometry('%dx%d+%d+%d' % (window_width, window_height, x, y))
-
-# Read CSV file 
-with open('results.csv') as f:
-  reader = csv.reader(f)
-  header = next(reader)
-  data = []
-  for row in reader:
-    data.append([col.strip() for col in row])
-
-# Define column widths
-col_widths = [20, 20, 30, 50]
-
-# Create Treeview
-tv = ttk.Treeview(root, columns=header, show='headings')
-tv.column("#0", width=0, stretch=tk.NO)
-for i, width in enumerate(col_widths):
-  tv.column(header[i], width=width, anchor='w')
-
-# Style the treeview
-style = ttk.Style()
-style.configure("Treeview", 
-  font=('Helvetica', 10),
-  rowheight=30,
-  fieldbackground="lightgrey",
-  borderwidth=2
-)
-style.configure("Treeview.Heading", 
-  font=('Helvetica', 12, 'bold'),
-  foreground='grey'  
-)
-
-for i, h in enumerate(header):
-  tv.heading(h, text=h.title(), command=lambda c=h: sortby(tv, c, 0))
-
-# Add data  
-for row in data:
-  if any(row):
-    tv.insert('', 'end', values=row)
-
-# Add scrollbar 
-scrollbar = ttk.Scrollbar(root)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-tv.configure(yscrollcommand=scrollbar.set)
-scrollbar.config(command=tv.yview)
-
-tv.pack(expand=True, fill=tk.BOTH, padx=20, pady=20)
-
-def sortby(tree, col, descending):
-  """Sort treeview contents when a column header is clicked"""
-  data = [(tree.set(child, col), child) for child in tree.get_children('')]
-
-  data.sort(reverse=descending)
-
-  for ix, item in enumerate(data):
-    tree.move(item[1], '', ix)
-
-  tree.heading(col, command=lambda col=col: sortby(tree, col, int(not descending)))
-
-root.eval('tk::PlaceWindow . center')
-root.mainloop()
