@@ -22,7 +22,7 @@ def get_client():
       password = input("Enter password: ")
       client = elasticsearch.Elasticsearch(
         cloud_id=cloud_id, 
-        http_auth=(username, password)
+        basic_auth=(username, password)
       )
 
     elif auth == 'api':
