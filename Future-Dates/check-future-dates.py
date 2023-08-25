@@ -105,8 +105,11 @@ if __name__ == '__main__':
   now = utc_tz.localize(datetime.datetime.utcnow())
 
   print(f"Current UTC time: {now.isoformat()}")
+  print(f"Querying the data. This may take a while...")
 
   results = search_future_timestamps(client)
+  
+  print(f"Querying complete. Found {len(results)} results. Writing to CSV...")
 
   with open('results.csv', 'w') as f:
 
@@ -122,3 +125,5 @@ if __name__ == '__main__':
       diff = relativedelta(timestamp, now)
 
       writer.writerow([index, doc_id, timestamp, f"{diff.years} years, {diff.months} months, {diff.days} days"])
+
+  print("Done! File saved as 'results.csv'")
