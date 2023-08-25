@@ -14,7 +14,7 @@ or
 ```
 python3 --version
 ```
-2. clone the repo or download as a zip.
+2. Download the ZIP file from https://github.com/travisestill/Elasticsearch-scripts/releases (you can probably clone the repo too)
 3. extract files to a location of your choice
 4. cd to the extracted folder, then run `pip3 install .` to resolve dependencies
 5. Run with `python3 check_future_dates.py`
