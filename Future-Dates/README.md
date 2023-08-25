@@ -6,7 +6,7 @@ Dependencies: Python3
 
 # Usage
 ```
-python3 ./check-future-dates
+python3 ./check-future-dates.py
 ```
 
 Follow the interactive prompts to supply connection parameters
