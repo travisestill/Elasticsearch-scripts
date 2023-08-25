@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
       diff = relativedelta(timestamp, now)
 
-      writer.writerow([index, doc_id, timestamp, f"{diff.years} years, {diff.months} months, {diff.days} days"])
-      print (f"Writing {index} {doc_id} {timestamp} {diff.years} years, {diff.months} months, {diff.days} days")
+      writer.writerow([index, doc_id, timestamp, f"{diff.years} years, {diff.months} months, {diff.days} days, diff.hours hours, {diff.minutes} minutes, {diff.seconds} seconds"])
+      print (f"Writing {index} {doc_id} {timestamp}")
 
   print("Done! File saved to './results.csv'")
