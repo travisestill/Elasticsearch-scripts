@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
   results = search_future_timestamps(client)
   
-  print(f"Querying complete. Found {len(results)} results. Writing to CSV...")
+  print(f"Querying complete. Found {len(results)} results. Writing to CSV. This takes a long time too. Go get some water...")
 
   with open('results.csv', 'w') as f:
 
@@ -126,4 +126,4 @@ if __name__ == '__main__':
 
       writer.writerow([index, doc_id, timestamp, f"{diff.years} years, {diff.months} months, {diff.days} days"])
 
-  print("Done! File saved as 'results.csv'")
+  print("Done! File saved to './results.csv'")
